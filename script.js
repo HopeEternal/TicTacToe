@@ -18,17 +18,23 @@
     //Check to see if there is a winner
     function checkWinCon() {
         //Victory!
-        if (gameBoard[0][1] === 'X' && gameBoard[1] === 'X' && gameBoard[2] === 'X') {
-            alert(`${currPlayer} has won! Thanks for playing.`);
+        for (var i = 0; i < 3; i++) {
+            // check all rows
+            if (gameBoard[i][0] === gameBoard[i][1] &&
+                    gameBoard[i][0] === gameBoard[i][2]) {
+                alert(`${currPlayer} has won! Thanks for playing.`);
+            }
+            // check all columns
+            if (gameBoard[0][i] === gameBoard[1][i] &&
+                    gameBoard[0][i] === gameBoard[2][i]) {
+                alert(`${currPlayer} has won! Thanks for playing.`);
+            }
+            // check diagonally
+            if (gameBoard[0][0] === gameBoard[1][1] &&
+                    gameBoard[0][0] === gameBoard[2][2]) {
+                alert(`${currPlayer} has won! Thanks for playing.`);
+            }
         }
-        // if (gameBoard[0][0] === 'X') {
-        //     alert(`${currPlayer} has won! Thanks for playing.`);
-        //     isPlaying = false;
-        // }
-        // //Keep playing
-        // else {
-
-        // }
     }
 
 //UI Controller
@@ -46,6 +52,7 @@
 
     function userInput() {
         let itemID = event.target.id;
+        let position = itemID.split("");
         if (isPlaying) {
             
             if (document.getElementById(itemID).innerText == "") {
@@ -53,12 +60,12 @@
                 if (!currPlayer) {
                     var piece = 'X';
                     document.getElementById(itemID).innerText = piece;
-                    gameBoard[itemID] = piece;
+                    gameBoard[position[0]][position[1]] = piece;
                 }
                 else {
                     var piece = 'O';
                     document.getElementById(itemID).innerText = piece;
-                    gameBoard[itemID] = piece;
+                    gameBoard[position[0]][position[1]] = piece;
                 }
                 currPlayer = !currPlayer;
                 console.log(itemID);
