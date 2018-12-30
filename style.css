@@ -3,6 +3,12 @@
 html {
     font-family: 'Roboto', sans-serif;
     color: #363B47;
+    /*Background Patter*/
+    background-color: #fff;
+    background-image:
+        linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+        linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
 }
 
 body {
@@ -38,12 +44,17 @@ main {
 }
 
 .player1, .player2 {
-    background: #C1CAE8;
+    background: #848EAD;
     width: 80%;
     height: 150px;
     margin: 20px;
     padding: 10px;
 }
+
+.activePlayer {
+    background:rgb(250, 255, 206);
+}
+
 
 .players i {
     font-size: 54px;
@@ -54,14 +65,62 @@ main {
     margin: 10px;
 }
 
-/*ScoreBoard Section*/
+/*Score and Controller Section*/
 
-.scoreBoard {
+.scoreCont {
     float: right;
     width: 24%;
-    height: 200px;
-    background: #848EAD;
-    margin: 168px 3%;
+    margin: 168px 2%;
+}
+
+.scoreBoard {
+    border: #33bcb0 dashed .5em;
+}
+
+#player1Name, #player2Name {
+    margin-top: 0px;
+}
+
+.playerScore {
+    width: 50%;
+    float: left;
+    
+}
+
+.roundDisplay {
+    clear: both;
+    text-align: right;
+    padding: 30px 30px 10px 30px;
+    font-style: italic;
+}
+
+.gameControl {
+
+}
+
+#startGameBtn {
+    margin: 15%;
+    font-size: 26;
+    font-family: 'Roboto';
+    padding: 10 20;
+    background-color: #33bcb0;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;
+    border: #33bcb0 solid 1px;
+    border-radius: 5px;
+}
+
+#startGameBtn:hover {
+    background-color: rgb(250, 255, 206);
+    color: #363B47;
+}
+
+#startGameBtn:active {
+    background-color: #3BD6C9;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 /*Gameboard and Contents*/
@@ -74,6 +133,10 @@ main {
     width: 40%;
     height: 597px;
     margin: 0 auto;
+
+    /*Hardcoded Max Width until responsive update*/
+    max-width: 600px;
+
 }
 
 .gridBorderTop {
@@ -101,6 +164,7 @@ main {
     font-size: 170px;
     text-transform: uppercase;
     font-family: 'Raleway', sans-serif;
+    cursor: grab;
 }
 
 /* Rectangle Out */
@@ -142,7 +206,4 @@ main {
     -webkit-transform: scale(1);
     transform: scale(1);
   }
-  
-
-
-
+ 

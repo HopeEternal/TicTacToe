@@ -13,31 +13,46 @@
             <section class="players">
                 <div class="player1">
                     <i class="fas fa-user-ninja"></i>
-                    <h2> Player 1</h2>
+                    <h2 id="player1Name"> Player 1</h2>
                 </div>
                 <div class="player2">
                     <i class="fas fa-user-secret"></i>
-                    <h2> Player 2</h2>
+                    <h2 id="player1Name"> Player 2</h2>
                 </div>
             </section>
-            <section class="scoreBoard">
-                <h2>Scores</h2>
+            <section class="scoreCont">
+                <div class="scoreBoard">
+                    <h2>Scores</h2>
+                    <div class="playerScore">
+                        <h4 id="player1Name">Player 1</h4>
+                        <div id="p1Score">0</div>
+                    </div>
+                    <div class="playerScore">
+                        <h4 id="player2Name">Player 2</h4>
+                        <div id="p2Score">0</div>
+                    </div>
+                    <h4 class="roundDisplay">Round: <span id="currRound">0</span>/<span id="totRound">0</span></h4>
+                </div>
+                
+                <div class="gameControl">
+                    <button id="startGameBtn"><i class="fas fa-play"></i> Start New Game</button>
+                </div>
             </section>
             <section class="gameBoard">
                 <div class="gridRow">
-                    <div class="gridSquare gridBorderRight gridBorderBtm hvr-rectangle-out" id="1a">x</div>
-                    <div class="gridSquare gridBorderRight gridBorderBtm gridBorderLeft hvr-rectangle-out" id="1b">x</div>
-                    <div class="gridSquare gridBorderBtm gridBorderLeft hvr-rectangle-out" id="1c">x</div>
+                    <div class="gridSquare gridBorderRight gridBorderBtm hvr-rectangle-out" id="0"></div>
+                    <div class="gridSquare gridBorderRight gridBorderBtm gridBorderLeft hvr-rectangle-out" id="1"></div>
+                    <div class="gridSquare gridBorderBtm gridBorderLeft hvr-rectangle-out" id="2"></div>
                 </div>
                 <div class="gridRow">
-                    <div class="gridSquare gridBorderTop gridBorderRight gridBorderBtm hvr-rectangle-out" id="2a">o</div>
-                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight gridBorderBtm hvr-rectangle-out" id="2b">o</div>
-                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderBtm hvr-rectangle-out" id="2c">o</div>
+                    <div class="gridSquare gridBorderTop gridBorderRight gridBorderBtm hvr-rectangle-out" id="3"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight gridBorderBtm hvr-rectangle-out" id="4"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderBtm hvr-rectangle-out" id="5"></div>
                 </div>
                 <div class="gridRow">
-                    <div class="gridSquare gridBorderTop gridBorderRight hvr-rectangle-out" id="3a">x</div>
-                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight hvr-rectangle-out" id="3b">x</div>
-                    <div class="gridSquare gridBorderTop gridBorderLeft hvr-rectangle-out" id="3c">x</div>
+                    <div class="gridSquare gridBorderTop gridBorderRight hvr-rectangle-out" id="6"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight hvr-rectangle-out" id="7"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft hvr-rectangle-out" id="8"></div>
                 </div>
 
             </section>
