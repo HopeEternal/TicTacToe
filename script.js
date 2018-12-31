@@ -1,6 +1,5 @@
 //Data Controller
 
-
     let currPlayer;  //False is player 1, true is player 2
     let isPlaying = false;
     let round = 0;
@@ -17,23 +16,36 @@
 
     //Check to see if there is a winner
     function checkWinCon() {
+        function victoryAlert() {
+            setTimeout(function(){
+                alert(`${currPlayer} has won! Thanks for playing.`);
+            }, 100);
+        }
+
         //Victory!
         for (var i = 0; i < 3; i++) {
             // check all rows
             if (gameBoard[i][0] === gameBoard[i][1] &&
                     gameBoard[i][0] === gameBoard[i][2]) {
-                alert(`${currPlayer} has won! Thanks for playing.`);
+                victoryAlert();
+                isPlaying = false;
             }
             // check all columns
             if (gameBoard[0][i] === gameBoard[1][i] &&
                     gameBoard[0][i] === gameBoard[2][i]) {
-                alert(`${currPlayer} has won! Thanks for playing.`);
+                victoryAlert();
+                isPlaying = false;
             }
-            // check diagonally
-            if (gameBoard[0][0] === gameBoard[1][1] &&
-                    gameBoard[0][0] === gameBoard[2][2]) {
-                alert(`${currPlayer} has won! Thanks for playing.`);
-            }
+        }
+        // check diagonally 
+        if (gameBoard[0][0] === gameBoard[1][1] &&
+                gameBoard[0][0] === gameBoard[2][2]) {
+            victoryAlert();
+            isPlaying = false;
+        } else if (gameBoard[0][2] === gameBoard[1][1] &&
+                gameBoard[0][2] === gameBoard[2][0]) {
+            victoryAlert();
+            isPlaying = false;
         }
     }
 
@@ -70,7 +82,6 @@
                 currPlayer = !currPlayer;
                 console.log(itemID);
             }
-
         }
 
         checkWinCon();
