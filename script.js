@@ -47,6 +47,24 @@
             victoryAlert();
             isPlaying = false;
         }
+        // Detect Draw
+        else {
+            let draw = 0;
+            for (var i = 0; i < 3; i++) {
+                gameBoard[i].forEach(function(cur) {
+                    if (cur === 'X' || cur === 'O') {
+                        draw++;
+                    }
+                });
+                if (draw === 9) {
+                    setTimeout(function(){
+                        alert(`It's a draw! Thanks for playing.`);
+                    }, 100);
+                    isPlaying = false;
+                }
+            }
+        }
+
     }
 
 //UI Controller
@@ -80,12 +98,9 @@
                     gameBoard[position[0]][position[1]] = piece;
                 }
                 currPlayer = !currPlayer;
-                console.log(itemID);
             }
-        }
-
-        checkWinCon();
-
+            checkWinCon();
+        }        
     }
     
 //Controller Module
