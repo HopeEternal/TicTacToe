@@ -71,14 +71,19 @@
         if (state) {
             //Enter what to do if the Game is Playing
             console.log('Game is Playing');
+            let grid = document.querySelectorAll('.gridSquare');        
+            console.log(grid);
+            grid.forEach(cur => cur.classList.add('hvr-rectangle-out'));
         }
         else {
             //Enter what to do if the Game is not Playing
-            console.log('Game is Not Playing');
-            document.querySelector('.gridSquare').classList.remove('hvr-rectangle-out');
+            console.log('Game is Not Playing');            
+
             
-            //NEED TO FIX
-            console.log(document.getElementsByClassName('gridSquare'));        }
+        }
+
+
+
     }
     
 
