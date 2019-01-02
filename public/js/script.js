@@ -1,7 +1,6 @@
 //Data Controller
 
     let currPlayer;  //False is player 1, true is player 2
-    let isPlaying = false;
     let round = 0;
     let gameBoard = [
         ['a', 'b', 'c'],
@@ -28,24 +27,24 @@
             if (gameBoard[i][0] === gameBoard[i][1] &&
                     gameBoard[i][0] === gameBoard[i][2]) {
                 victoryAlert();
-                isPlaying = false;
+                isPlaying(false);
             }
             // check all columns
             if (gameBoard[0][i] === gameBoard[1][i] &&
                     gameBoard[0][i] === gameBoard[2][i]) {
                 victoryAlert();
-                isPlaying = false;
+                isPlaying(false);
             }
         }
         // check diagonally 
         if (gameBoard[0][0] === gameBoard[1][1] &&
                 gameBoard[0][0] === gameBoard[2][2]) {
             victoryAlert();
-            isPlaying = false;
+            isPlaying(false);
         } else if (gameBoard[0][2] === gameBoard[1][1] &&
                 gameBoard[0][2] === gameBoard[2][0]) {
             victoryAlert();
-            isPlaying = false;
+            isPlaying(false);
         }
         // Detect Draw
         else {
@@ -60,12 +59,29 @@
                     setTimeout(function(){
                         alert(`It's a draw! Thanks for playing.`);
                     }, 100);
-                    isPlaying = false;
+                    isPlaying(false);
                 }
             }
         }
 
     }
+
+    //isPlaying Game State Definitions
+    function isPlaying(state) {
+        if (state) {
+            //Enter what to do if the Game is Playing
+            console.log('Game is Playing');
+        }
+        else {
+            //Enter what to do if the Game is not Playing
+            console.log('Game is Not Playing');
+            document.querySelector('.gridSquare').classList.remove('hvr-rectangle-out');
+            
+            //NEED TO FIX
+            console.log(document.getElementsByClassName('gridSquare'));        }
+    }
+    
+
 
 //UI Controller
 
@@ -105,12 +121,14 @@
     
 //Controller Module
 
-    document.getElementById('startGameBtn').addEventListener('click', startGame);
-    document.querySelector('.gameBoard').addEventListener('click', userInput);
+    function setupEventListeners() {
+        document.getElementById('startGameBtn').addEventListener('click', startGame);
+        document.querySelector('.gameBoard').addEventListener('click', userInput);
+    }
 
 
     function startGame() {
-        isPlaying = true;
+        isPlaying(true);
         console.log('Start game clickeD!')
         //Start round counter in UI and Data
         
@@ -125,4 +143,10 @@
         
     }
 
+    function init() {
+        console.log('Application has started.');
+        isPlaying(false);
+        setupEventListeners();
+    }
     
+    init();
