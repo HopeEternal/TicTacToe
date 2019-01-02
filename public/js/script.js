@@ -46,7 +46,7 @@
             victoryAlert();
             isPlaying(false);
         }
-        // Detect Draw
+        // Detect Draw and no winners
         else {
             let draw = 0;
             for (var i = 0; i < 3; i++) {
