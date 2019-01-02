@@ -1,5 +1,5 @@
 //Data Controller
-
+    let gameState;
     let currPlayer;  //False is player 1, true is player 2
     let round = 0;
     let gameBoard = [
@@ -74,12 +74,13 @@
             let grid = document.querySelectorAll('.gridSquare');        
             console.log(grid);
             grid.forEach(cur => cur.classList.add('hvr-rectangle-out'));
+            gameState = true;
         }
         else {
             //Enter what to do if the Game is not Playing
             console.log('Game is Not Playing');            
 
-            
+            gameState = false;
         }
 
 
@@ -104,7 +105,7 @@
     function userInput() {
         let itemID = event.target.id;
         let position = itemID.split("");
-        if (isPlaying) {
+        if (gameState) {
             
             if (document.getElementById(itemID).innerText == "") {
                 
@@ -150,6 +151,7 @@
 
     function init() {
         console.log('Application has started.');
+        gameState=false;
         isPlaying(false);
         setupEventListeners();
     }
