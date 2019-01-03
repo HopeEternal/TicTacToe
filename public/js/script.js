@@ -122,6 +122,7 @@
                 currPlayer = !currPlayer;
             }
             checkWinCon();
+            displayCurrPlayer();
         }        
     }
     
