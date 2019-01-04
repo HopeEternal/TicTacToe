@@ -17,7 +17,10 @@
     function checkWinCon() {
         function victoryAlert() {
             setTimeout(function(){
-                alert(`${currPlayer} has won! Thanks for playing.`);
+                if (currPlayer)
+                    alert(`Player 2 (X) has won! Thanks for playing.`);
+                else
+                    alert(`Player 1 (O) has won! Thanks for playing.`);
             }, 100);
         }
 
