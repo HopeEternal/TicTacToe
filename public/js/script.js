@@ -2,6 +2,8 @@
     let gameState;
     let currPlayer;  //False is player 1, true is player 2
     let round = 0;
+    let player1Score = 0;
+    let player2Score = 0;
     let gameBoard = [
         ['a', 'b', 'c'],
         ['d', 'e', 'f'],
@@ -17,10 +19,16 @@
     function checkWinCon() {
         function victoryAlert() {
             setTimeout(function(){
-                if (currPlayer)
+                if (currPlayer) {
+                    player2Score++;
+                    document.getElementById("p2Score").innerText = player2Score;
                     alert(`Player 2 (X) has won! Thanks for playing.`);
-                else
+                }
+                else {
+                    player1Score++;
+                    document.getElementById("p1Score").innerText = player1Score;
                     alert(`Player 1 (O) has won! Thanks for playing.`);
+                }
             }, 100);
         }
 
@@ -154,7 +162,8 @@
         }
 
         //Start round counter in UI and Data
-        
+        round++;
+        document.getElementById('currRound').innerText = round;
 
         //establish who is x and who is 0
         
