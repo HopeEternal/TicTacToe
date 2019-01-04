@@ -135,8 +135,21 @@
 
 
     function startGame() {
+        gameState = true;
         isPlaying(true);
         console.log('Start game clickeD!')
+        //Reset gameBoard
+        gameBoard = [
+            ['a', 'b', 'c'],
+            ['d', 'e', 'f'],
+            ['g', 'h', 'i']
+        ];
+        for (var row = 0; row < 3; row++) {
+            for (var column = 0; column < 3; column++) {
+                document.getElementById("" + row + column).innerText = '';
+            }
+        }
+
         //Start round counter in UI and Data
         
 
