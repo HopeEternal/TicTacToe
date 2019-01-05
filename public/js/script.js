@@ -155,6 +155,7 @@
         document.getElementById('player2Name').innerText = p2Name;
         document.getElementById('scrPlayer1Name').innerText = p1Name;
         document.getElementById('scrPlayer2Name').innerText = p2Name;
+        startGame();
 
     }
 
