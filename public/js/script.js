@@ -1,5 +1,3 @@
-
-
 //Data Controller
     let gameState;
     let currPlayer;  //False is player 1, true is player 2
@@ -9,6 +7,7 @@
     let p1Name = "Player 1";
     let p2Name = "Player 2";
     let points2Win = 0;
+    var gameWon = false;
     let gameBoard = [
         ['a', 'b', 'c'],
         ['d', 'e', 'f'],
@@ -27,12 +26,12 @@
                 if (currPlayer) {
                     player2Score++;
                     document.getElementById("p2Score").innerText = player2Score;
-                    alert(`Player 2 (X) has won! Thanks for playing.`);
+                    alert(`${p2Name} has won the round!`);
                 }
                 else {
                     player1Score++;
                     document.getElementById("p1Score").innerText = player1Score;
-                    alert(`Player 1 (O) has won! Thanks for playing.`);
+                    alert(`${p1Name} has won the round!`);
                 }
             }, 100);
         }
@@ -79,7 +78,16 @@
                 }
             }
         }
-
+        // check for game winner
+        setTimeout(function(){
+            if (player1Score == points2Win) {
+                alert(`${p1Name} has won the game! Thanks for playing.`);
+                gameWon = true;
+            } else if (player2Score == points2Win) {
+                alert(`${p2Name} has won the game! Thanks for playing.`);
+                gameWon = true;
+            }
+        }, 100);
     }
 
     //isPlaying Game State Definitions
@@ -149,7 +157,7 @@
         document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
         p1Name = document.getElementById('player1Input').value;
         p2Name = document.getElementById('player2Input').value;
-        points2Win = document.getElementById('player2Input').value;
+        points2Win = parseInt(document.getElementById('points2Win').value);
 
         document.getElementById('player1Name').innerText = p1Name;
         document.getElementById('player2Name').innerText = p2Name;
@@ -170,33 +178,36 @@
 
 
     function startGame() {
-        gameState = true;
         isPlaying(true);
-        console.log('Start game clickeD!')
-        //Reset gameBoard
-        gameBoard = [
-            ['a', 'b', 'c'],
-            ['d', 'e', 'f'],
-            ['g', 'h', 'i']
-        ];
-        for (var row = 0; row < 3; row++) {
-            for (var column = 0; column < 3; column++) {
-                document.getElementById("" + row + column).innerText = '';
+        if (!gameState && !gameWon) {
+            gameState = true;
+            
+            isPlaying(true);
+            console.log('Start game clickeD!')
+            //Reset gameBoard
+            gameBoard = [
+                ['a', 'b', 'c'],
+                ['d', 'e', 'f'],
+                ['g', 'h', 'i']
+            ];
+            for (var row = 0; row < 3; row++) {
+                for (var column = 0; column < 3; column++) {
+                    document.getElementById("" + row + column).innerText = '';
+                }
             }
+
+            //Start round counter in UI and Data
+            round++;
+            document.getElementById('currRound').innerText = round;
+
+            //establish who is x and who is 0
+            
+            //Start current player function
+            currPlayer = firstPlayer();
+            
+            //Display first player in UI
+            displayCurrPlayer();
         }
-
-        //Start round counter in UI and Data
-        round++;
-        document.getElementById('currRound').innerText = round;
-
-        //establish who is x and who is 0
-        
-        //Start current player function
-        currPlayer = firstPlayer();
-        
-        //Display first player in UI
-        displayCurrPlayer();
-        
     }
 
     function init() {
