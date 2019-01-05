@@ -6,6 +6,17 @@
         <title>TicTacToe</title>
     </head>
     <body>
+        <div id="modal">
+            <div>
+                <h1>Choose wisely!</h1>
+                <form>
+                    <label>Enter Player 1's Name: <input id="player1Input" type="text"></label>
+                    <label>Enter Player 2's Name <input id="player2Input" type="text"></label>
+                    <label>Enter points required to win: <input id="points2Win" type="text"></label>
+                        <btn class="buttonStyle" id="modalStartBtn">Start!</btn>
+                </form>
+            </div>
+        </div>
         <header>
             <h1>TicTacToe</h1>
         </header>
@@ -17,25 +28,25 @@
                 </div>
                 <div class="player2">
                     <i class="fas fa-user-secret"></i>
-                    <h2 id="player1Name"> Player 2</h2>
+                    <h2 id="player2Name"> Player 2</h2>
                 </div>
             </section>
             <section class="scoreCont">
                 <div class="scoreBoard">
                     <h2>Scores</h2>
                     <div class="playerScore">
-                        <h4 id="player1Name">Player 1</h4>
+                        <h4 id="scrPlayer1Name">Player 1</h4>
                         <div id="p1Score">0</div>
                     </div>
                     <div class="playerScore">
-                        <h4 id="player2Name">Player 2</h4>
+                        <h4 id="scrPlayer2Name">Player 2</h4>
                         <div id="p2Score">0</div>
                     </div>
-                    <h4 class="roundDisplay">Round: <span id="currRound">0</span>/<span id="totRound">0</span></h4>
+                    <h4 class="roundDisplay">Round: <span id="currRound">0</span></h4>
                 </div>
                 
                 <div class="gameControl">
-                    <button id="startGameBtn"><i class="fas fa-play"></i> Start New Game</button>
+                    <button id="startGameBtn" class="buttonStyle"><i class="fas fa-play"></i> Start New Game</button>
                 </div>
             </section>
             <section class="gameBoard">

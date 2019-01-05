@@ -98,7 +98,7 @@ main {
 
 }
 
-#startGameBtn {
+.buttonStyle {
     margin: 15%;
     font-size: 26;
     font-family: 'Roboto';
@@ -112,12 +112,12 @@ main {
     border-radius: 5px;
 }
 
-#startGameBtn:hover {
+.buttonStyle:hover {
     background-color: rgb(250, 255, 206);
     color: #363B47;
 }
 
-#startGameBtn:active {
+.buttonStyle:active {
     background-color: #3BD6C9;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
@@ -207,3 +207,35 @@ main {
     transform: scale(1);
   }
  
+
+  /*Modals*/
+  #modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #modal div {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.95);
+    line-height: 4em;
+    color: #333333;
+  }
+
+  #modal form label {
+    display: block;
+  }
+
+  .hidden { 
+    display: none;
+  }

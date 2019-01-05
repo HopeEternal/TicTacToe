@@ -1,9 +1,14 @@
+
+
 //Data Controller
     let gameState;
     let currPlayer;  //False is player 1, true is player 2
     let round = 0;
     let player1Score = 0;
     let player2Score = 0;
+    let p1Name = "Player 1";
+    let p2Name = "Player 2";
+    let points2Win = 0;
     let gameBoard = [
         ['a', 'b', 'c'],
         ['d', 'e', 'f'],
@@ -94,10 +99,7 @@
             gameState = false;
         }
 
-
-
     }
-    
 
 
 //UI Controller
@@ -136,12 +138,33 @@
             displayCurrPlayer();
         }        
     }
+
+    function startModal() {
+        console.log('Start Modal');
+        
+    }
+
+    function hideModal() {
+        console.log('Hide Modal');
+        document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
+        p1Name = document.getElementById('player1Input').value;
+        p2Name = document.getElementById('player2Input').value;
+        points2Win = document.getElementById('player2Input').value;
+
+        document.getElementById('player1Name').innerText = p1Name;
+        document.getElementById('player2Name').innerText = p2Name;
+        document.getElementById('scrPlayer1Name').innerText = p1Name;
+        document.getElementById('scrPlayer2Name').innerText = p2Name;
+
+    }
+
     
 //Controller Module
 
     function setupEventListeners() {
         document.getElementById('startGameBtn').addEventListener('click', startGame);
         document.querySelector('.gameBoard').addEventListener('click', userInput);
+        document.getElementById('modalStartBtn').addEventListener('click', hideModal);
     }
 
 
@@ -180,6 +203,7 @@
         gameState=false;
         isPlaying(false);
         setupEventListeners();
+        startModal();
     }
     
     init();
