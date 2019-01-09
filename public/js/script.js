@@ -83,9 +83,11 @@
             if (player1Score == points2Win) {
                 alert(`${p1Name} has won the game! Thanks for playing.`);
                 gameWon = true;
+                isPlaying(false);
             } else if (player2Score == points2Win) {
                 alert(`${p2Name} has won the game! Thanks for playing.`);
                 gameWon = true;
+                isPlaying(false);
             }
         }, 100);
     }
@@ -95,18 +97,15 @@
         if (state) {
             //Enter what to do if the Game is Playing
             console.log('Game is Playing');
-            let grid = document.querySelectorAll('.gridSquare');        
-            console.log(grid);
+            let grid = document.querySelectorAll('.gridSquare');       
             grid.forEach(cur => cur.classList.add('hvr-rectangle-out'));
             gameState = true;
         }
         else {
             //Enter what to do if the Game is not Playing
             console.log('Game is Not Playing');            
-
             gameState = false;
         }
-
     }
 
 
@@ -149,7 +148,6 @@
 
     function startModal() {
         console.log('Start Modal');
-        
     }
 
     function hideModal() {
@@ -164,7 +162,6 @@
         document.getElementById('scrPlayer1Name').innerText = p1Name;
         document.getElementById('scrPlayer2Name').innerText = p2Name;
         startGame();
-
     }
 
     function multiPlayerSettings() {
@@ -191,9 +188,7 @@
         
     }
 
-
     function startGame() {
-        isPlaying(true);
         if (!gameState && !gameWon) {
             gameState = true;
             
