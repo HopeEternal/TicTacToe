@@ -232,9 +232,18 @@ main {
     color: #333333;
   }
 
-  #modal form label {
+  #modal form .textEntry label {
     display: block;
   }
+
+  #modal form fieldset {
+    border: none;
+  }
+  #modal form fieldset .playerSelection label {
+    float: left;
+  }
+
+  playerSelection
 
   .hidden { 
     display: none;

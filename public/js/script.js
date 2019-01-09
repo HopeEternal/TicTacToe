@@ -159,6 +159,18 @@
 
     }
 
+    function multiPlayerSettings() {
+        if (singleRadio.checked) {
+            console.log('Single is checked');
+            document.getElementById('p2Cont').style.display = "none";
+        }
+        else if (multiRadio.checked) {
+            console.log('Multi selected');
+            document.getElementById('p2Cont').style.display = "block";
+        }
+        console.log('Triggered Player settings');
+    }
+
     
 //Controller Module
 
@@ -166,6 +178,9 @@
         document.getElementById('startGameBtn').addEventListener('click', startGame);
         document.querySelector('.gameBoard').addEventListener('click', userInput);
         document.getElementById('modalStartBtn').addEventListener('click', hideModal);
+        document.getElementById('singleRadio').addEventListener('click', multiPlayerSettings);
+        document.getElementById('multiRadio').addEventListener('click', multiPlayerSettings);
+        
     }
 
 
