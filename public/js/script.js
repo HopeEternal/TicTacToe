@@ -157,10 +157,20 @@
         p2Name = document.getElementById('player2Input').value;
         points2Win = parseInt(document.getElementById('points2Win').value);
 
-        document.getElementById('player1Name').innerText = p1Name;
-        document.getElementById('player2Name').innerText = p2Name;
-        document.getElementById('scrPlayer1Name').innerText = p1Name;
-        document.getElementById('scrPlayer2Name').innerText = p2Name;
+        //Show Player Names based on Single or Multi
+        if (singleRadio.checked) {
+            document.getElementById('player1Name').innerText = p1Name;
+            document.getElementById('player2Name').innerText = "Player 2 Bot";
+            document.getElementById('scrPlayer1Name').innerText = p1Name;
+            document.getElementById('scrPlayer2Name').innerText = "Player 2 Bot";
+        }
+        else if (multiRadio.checked) {
+            document.getElementById('player1Name').innerText = p1Name;
+            document.getElementById('player2Name').innerText = p2Name;
+            document.getElementById('scrPlayer1Name').innerText = p1Name;
+            document.getElementById('scrPlayer2Name').innerText = p2Name;
+        }
+
         startGame();
     }
 
