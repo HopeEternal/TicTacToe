@@ -1,5 +1,5 @@
 # TicTacToe
-Tic Tac Toe written in ES6
+Tic Tac Toe written in ES6 with NodeJS (webpack and babel)
 
 Tic Tac Toe in development, currently local only, eventually will be online.
 
