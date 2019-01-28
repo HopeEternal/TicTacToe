@@ -1,9 +1,9 @@
 var HTTP_PORT = process.env.PORT || 8080;
 var express = require("express");
 var app = express();
-var path    = require("path");
+var path = require("path");
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/src'));
 
 // setup a 'route' to listen on the default url path
 app.get("/", (req, res) => {
@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/elements", (req, res) => {
-    res.sendFile(__dirname + '/public/elements.html');
+    res.sendFile(__dirname + '/src/elements.html');
 });
 
 // setup http server to listen on HTTP_PORT
