@@ -1,0 +1,84 @@
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway|Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        <title>TicTacToe</title>
+    </head>
+    <body>
+        <div id="modal">
+            <div>
+                <h1>Choose wisely!</h1>
+                <form>                             
+                    <fieldset class="playerSelection">
+                        <input type="radio" id="singleRadio" name="playerSelect" value="SinglePlayer">
+                        <label for="contactChoice1">Local Single Player</label>
+                        <input type="radio" id="multiRadio" name="playerSelect" value="MultiPlayer">
+                        <label for="contactChoice2">Local Multi-Player</label>
+                    </fieldset>
+                    <fieldset class="textEntry">
+                        <label id="p1Cont">Enter Player 1's Name: <input id="player1Input" type="text"></label>
+                        <label id="p2Cont">Enter Player 2's Name: <input id="player2Input" type="text"></label>
+                        <label>Enter points required to win: <input id="points2Win" type="text"></label>
+                    </fieldset>
+                    <btn class="buttonStyle" id="modalStartBtn">Start!</btn>
+                </form>
+            </div>
+        </div>
+        <header>
+            <h1>TicTacToe</h1>
+        </header>
+        <main>
+            <section class="players">
+                <div class="player1">
+                    <i class="fas fa-user-ninja"></i>
+                    <h2 id="player1Name"> Player 1</h2>
+                </div>
+                <div class="player2">
+                    <i class="fas fa-user-secret"></i>
+                    <h2 id="player2Name"> Player 2</h2>
+                </div>
+            </section>
+            <section class="scoreCont">
+                <div class="scoreBoard">
+                    <h2>Scores</h2>
+                    <div class="playerScore">
+                        <h4 id="scrPlayer1Name">Player 1</h4>
+                        <div id="p1Score">0</div>
+                    </div>
+                    <div class="playerScore">
+                        <h4 id="scrPlayer2Name">Player 2</h4>
+                        <div id="p2Score">0</div>
+                    </div>
+                    <h4 class="roundDisplay">Round: <span id="currRound">0</span></h4>
+                </div>
+                
+                <div class="gameControl">
+                    <button id="startGameBtn" class="buttonStyle"><i class="fas fa-play"></i> Start New Game</button>
+                </div>
+            </section>
+            <section class="gameBoard">
+                <div class="gridRow">
+                    <div class="gridSquare gridBorderRight gridBorderBtm" id="00"></div>
+                    <div class="gridSquare gridBorderRight gridBorderBtm gridBorderLeft" id="01"></div>
+                    <div class="gridSquare gridBorderBtm gridBorderLeft" id="02"></div>
+                </div>
+                <div class="gridRow">
+                    <div class="gridSquare gridBorderTop gridBorderRight gridBorderBtm" id="10"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight gridBorderBtm" id="11"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderBtm" id="12"></div>
+                </div>
+                <div class="gridRow">
+                    <div class="gridSquare gridBorderTop gridBorderRight" id="20"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft gridBorderRight" id="21"></div>
+                    <div class="gridSquare gridBorderTop gridBorderLeft" id="22"></div>
+                </div>
+
+            </section>
+            
+        </main>
+
+
+        <script src="js/index.js" type="text/javascript"></script>
+    </body>
+</html>
