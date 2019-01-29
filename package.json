@@ -1,15 +1,25 @@
 {
-  "name": "heroku_node_js",
+  "name": "forkify",
   "version": "1.0.0",
-  "description": "Node JS hosted on Heroku Express Server",
-  "main": "server.js",
+  "description": "forkify app",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
   },
-  "author": "",
+  "author": "Risa Hall",
   "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
   "dependencies": {
-    "express": "^4.16.4",
-    "path": "^0.12.7"
+    "babel-polyfill": "^6.26.0"
   }
 }
