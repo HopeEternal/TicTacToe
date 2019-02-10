@@ -1,11 +1,25 @@
+<!doctype html>
+
 <html lang="en">
     <head>
+        <meta charset="utf-8">
+
+        <title>Tic Tac Toe</title>
+        <meta name="description" content="A Tic Tac Toe game built with HTML5, CSS3, ES5+, NodeJS(Webpack and Babel).">
+        <meta name="author" content="SitePoint">
+
+        <!--Fonts-->
         <link href="https://fonts.googleapis.com/css?family=Pacifico|Raleway|Roboto" rel="stylesheet">
+        <!-- Icon Sets-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!--CSS-->
         <link rel="stylesheet" href="css/style.css">
-        <title>TicTacToe</title>
+        <!--Favicon-->
+        <link rel="icon" href="favicon.ico">
+
     </head>
     <body>
+        <noscript>Please enable Javascript to play!</noscript>
         <div id="modal">
             <div>
                 <h1>Choose wisely!</h1>
@@ -13,7 +27,7 @@
                     <fieldset class="playerSelection">
                         <input type="radio" id="singleRadio" name="playerSelect" value="SinglePlayer">
                         <label for="contactChoice1">Local Single Player</label>
-                        <input type="radio" id="multiRadio" name="playerSelect" value="MultiPlayer">
+                        <input type="radio" id="multiRadio" name="playerSelect" value="MultiPlayer" checked="checked">
                         <label for="contactChoice2">Local Multi-Player</label>
                     </fieldset>
                     <fieldset class="textEntry">

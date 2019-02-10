@@ -3,6 +3,17 @@ import { Game } from './models/Main';
 let game = new Game();
 console.log(game);
 
+//Import AI from AISingle
+import { ai } from './models/AIsingle';
+
+//Requires
+//var pg = require('pg');
+
+//A localhost PostgreSQL database connection string
+//var connectionString = "postgres://datafetch:fetchscores4u@localhost/tictactoescoreboard";
+
+
+
 
 //Controller Module
 
@@ -72,27 +83,49 @@ function displayCurrPlayer(gameInstance) {
 }
 
 function userInput(gameInstance) {
-    let itemID = event.target.id;
-    let position = itemID.split("");
-    if (gameInstance.gameState) {
-        
-        if (document.getElementById(itemID).innerText == "") {
-            
-            if (!gameInstance.currPlayer) {
-                var piece = 'X';
-                document.getElementById(itemID).innerText = piece;
-                gameInstance.gameBoard[position[0]][position[1]] = piece;
+    let itemID;
+    let position;
+    //Human and AI Input for Local games
+    function updateGameboard(position) {
+        if (gameInstance.gameState) {
+            if (document.getElementById(itemID).innerText == "") {
+                
+                if (!gameInstance.currPlayer) {
+                    var piece = 'X';
+                    document.getElementById(itemID).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                }
+                else {
+                    var piece = 'O';
+                    document.getElementById(itemID).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                }
+                gameInstance.currPlayer = !gameInstance.currPlayer;
             }
-            else {
-                var piece = 'O';
-                document.getElementById(itemID).innerText = piece;
-                gameInstance.gameBoard[position[0]][position[1]] = piece;
-            }
-            gameInstance.currPlayer = !gameInstance.currPlayer;
+            gameInstance.checkWinCon();
+            displayCurrPlayer(gameInstance);
         }
-        gameInstance.checkWinCon();
-        displayCurrPlayer(gameInstance);
-    }        
+    } 
+    //Check to determine what type of game and number of players/bots
+    if (gameInstance.multiPlayer === 'localSingle') {
+        //Human
+        if (gameInstance.currPlayer === false) {
+            itemID = event.target.id;
+            position = itemID.split("");
+            updateGameboard(position);
+        } 
+        //Bot
+        else {
+            position = ai(gameInstance);
+            itemID = position.join('');
+            updateGameboard(position);
+        }
+
+    } else if (gameInstance.multiPlayer === 'localMulti') {
+        updateGameboard(position);
+    }
+    
+          
 }
 
 function startModal() {
@@ -112,12 +145,16 @@ function hideModal(gameInstance) {
         document.getElementById('player2Name').innerText = "Player 2 Bot";
         document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
         document.getElementById('scrPlayer2Name').innerText = "Player 2 Bot";
+        //Set game type to local single player
+        gameInstance.multiPlayer = 'localSingle';
     }
     else if (multiRadio.checked) {
         document.getElementById('player1Name').innerText = gameInstance.p1Name;
         document.getElementById('player2Name').innerText = gameInstance.p2Name;
         document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
         document.getElementById('scrPlayer2Name').innerText = gameInstance.p2Name;
+        //Set game type to local multi player
+        gameInstance.multiPlayer = 'localMulti';
     }
     startGame(gameInstance);
 }

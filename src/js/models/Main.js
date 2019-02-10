@@ -12,6 +12,7 @@ export class Game {
         this.p1Name = "Player 1";
         this.p2Name = "Player 2";
         this.points2Win = 0;
+        this.multiPlayer; //String with 3 options: localSingle, localMulti, onlineMulti
         this.gameWon = false;
         this.gameBoard = [
             ['a', 'b', 'c'],

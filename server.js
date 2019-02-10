@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/elements", (req, res) => {
-    res.sendFile(__dirname + '/src/elements.html');
+    res.sendFile(__dirname + '/dist/elements.html');
 });
 
 // setup http server to listen on HTTP_PORT
