@@ -1,0 +1,248 @@
+/*Globals*/
+
+html {
+    font-family: 'Roboto', sans-serif;
+    color: #363B47;
+    /*Background Patter*/
+    background-color: #fff;
+    background-image:
+        linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+        linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
+}
+
+body {
+    text-align: center;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+header {
+    font-family: 'Pacifico', cursive;
+    font-size: 64px;
+    color: #3BD6C9;
+}
+
+header h1 {
+    margin: 0 auto;
+    text-shadow: 2px 2px #848EAD;
+}
+
+main {
+    width: 98vw;
+    font-size: 22px;
+}
+
+/*Player Section*/
+
+.players {
+    float: left;
+    width: 28%;
+    padding: 97px 0px;
+    margin-left: 2%;
+}
+
+.player1, .player2 {
+    background: #848EAD;
+    width: 80%;
+    height: 150px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.activePlayer {
+    background:rgb(250, 255, 206);
+}
+
+
+.players i {
+    font-size: 54px;
+    padding-top: 20px;
+}
+
+.players h2 {
+    margin: 10px;
+}
+
+/*Score and Controller Section*/
+
+.scoreCont {
+    float: right;
+    width: 24%;
+    margin: 88px 2%;
+}
+
+.scoreBoard {
+    border: #33bcb0 dashed .5em;
+}
+
+#player1Name, #player2Name {
+    margin-top: 0px;
+}
+
+.playerScore {
+    width: 50%;
+    float: left;
+    
+}
+
+.roundDisplay {
+    clear: both;
+    text-align: right;
+    padding: 30px 30px 10px 30px;
+    font-style: italic;
+}
+
+.gameControl {
+
+}
+
+.buttonStyle {
+    margin: 15%;
+    font-size: 26px;
+    font-family: 'Roboto';
+    padding: 10px 20px;
+    background-color: #33bcb0;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;
+    border: #33bcb0 solid 1px;
+    border-radius: 5px;
+}
+
+.buttonStyle:hover {
+    background-color: rgb(250, 255, 206);
+    color: #363B47;
+}
+
+.buttonStyle:active {
+    background-color: #3BD6C9;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+/*Gameboard and Contents*/
+
+.gameBoard {
+    border-radius: 6px;
+    background: #C1CAE8;
+    color: #fff;
+    font-size: 36px;
+    width: 40%;
+    height: 597px;
+    margin: 0 auto;
+
+    /*Hardcoded Max Width until responsive update*/
+    max-width: 600px;
+
+}
+
+.gridBorderTop {
+    border-top: #848EAD solid 5px;
+}
+
+.gridBorderLeft {
+    border-left: #848EAD solid 5px; 
+}
+
+.gridBorderRight {
+    border-right: #848EAD solid 5px;
+}
+
+.gridBorderBtm {
+    border-bottom: #848EAD solid 5px;
+}
+
+.gridSquare {
+    border-radius: 6px;
+    margin: -4px;
+    width: 33.55%;
+    height: 200px;
+    float: left;
+    font-size: 170px;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    cursor: grab;
+}
+
+/* Rectangle Out */
+.hvr-rectangle-out {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+   /* background: #e1e1e1;*/
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  .hvr-rectangle-out:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #29968D;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .hvr-rectangle-out:hover, .hvr-rectangle-out:focus, .hvr-rectangle-out:active {
+    color: white;
+  }
+  .hvr-rectangle-out:hover:before, .hvr-rectangle-out:focus:before, .hvr-rectangle-out:active:before {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+ 
+
+  /*Modals*/
+  #modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  #modal div {
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background-color: rgba(255, 255, 255, 0.95);
+    line-height: 4em;
+    color: #333333;
+  }
+
+  #modal form .textEntry label {
+    display: block;
+  }
+
+  #modal form fieldset {
+    border: none;
+  }
+  #modal form fieldset .playerSelection label {
+    float: left;
+  }
+
+  .hidden { 
+    display: none;
+  }
