@@ -1,6 +1,21 @@
-# TicTacToe
-Tic Tac Toe written in ES6
+# Tic Tac Toe
 
-Tic Tac Toe in development, currently local only, eventually will be online.
+The classic Tic Tac Toe game written in HTML, CSS, and JavaScript ES6. Includes a fully functioning single player against a computer and local multiplayer too. Online multiplayer is currently in the works.
 
-Now available on Heroku: https://tictactoenode.herokuapp.com/
+Now available on Heroku: https://tictactoeheroku.herokuapp.com/
+
+## Built With
+
+* [Node.js](https://nodejs.org/) - JavaScript runtime
+* [Express](https://expressjs.com/) - The web framework used
+* [Babel](https://babeljs.io/) - JavaScript Compiler
+* [Webpack](https://webpack.js.org/) - Project Bundler
+
+## Authors
+
+* **Risa Lee Hall** - *Project Lead and Designer* - [HopeEternal](https://github.com/HopeEternal)
+* **Wilson Chai** - *Backend Engineer* - [WilsonChai](https://github.com/WilsonChai)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
