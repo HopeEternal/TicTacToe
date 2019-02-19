@@ -11907,10 +11907,12 @@ function userInput(gameInstance) {
         //Bot
         else {
                 position = (0, _AIsingle.ai)(gameInstance);
-                itemID = position.join('');
+                //itemID = position.join('');
                 updateGameboard(position);
             }
     } else if (gameInstance.multiPlayer === 'localMulti') {
+        itemID = event.target.id;
+        position = itemID.split("");
         updateGameboard(position);
     }
 }
@@ -11975,7 +11977,6 @@ var ai = exports.ai = function aiBot(gameInstance) {
 
     var position = [0, 0];
     var continueSearch = true;
-    var priorityCalc = 0;
     var aiBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
     // 1) Find open spaces and calculate priority by updating array
@@ -12066,7 +12067,6 @@ var ai = exports.ai = function aiBot(gameInstance) {
 
     // a) If there are 2 possible wins/losses, randomly place (unless it can line up 2 in a row) (This is not needed anymore. - Wilson)
 
-
     // 3) Check to see if the center is open
     if (continueSearch) {
         if (aiBoard[1][1] === 0) {
@@ -12093,13 +12093,6 @@ var ai = exports.ai = function aiBot(gameInstance) {
     //a) Priority: Place across from opponent
 
     //b) Calculate highest value open space
-
-    // test returns
-    // if (position[0] === 0 && position[1] === 0)
-    // for (var i = 0; i < 3; i++)
-    //     for (var j = 0; j < 3; j++)
-    //         if (aiBoard[i][j] == 0)
-    //             position = [ i, j];
 
     return position;
 };

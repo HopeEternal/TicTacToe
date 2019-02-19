@@ -118,15 +118,15 @@ function userInput(gameInstance) {
         //Bot
         else {
             position = ai(gameInstance);
-            itemID = position.join('');
+            //itemID = position.join('');
             updateGameboard(position);
         }
 
     } else if (gameInstance.multiPlayer === 'localMulti') {
+        itemID = event.target.id;
+        position = itemID.split("");
         updateGameboard(position);
     }
-    
-          
 }
 
 function startModal() {
