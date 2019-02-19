@@ -11907,7 +11907,7 @@ function userInput(gameInstance) {
         //Bot
         else {
                 position = (0, _AIsingle.ai)(gameInstance);
-                //itemID = position.join('');
+                itemID = position.join('');
                 updateGameboard(position);
             }
     } else if (gameInstance.multiPlayer === 'localMulti') {
@@ -12159,7 +12159,11 @@ var Game = exports.Game = function () {
                     if (!that.currPlayer) {
                         that.player2Score++;
                         document.getElementById("p2Score").innerText = that.player2Score;
-                        alert(that.p2Name + " has won the round!");
+                        if (that.multiPlayer == "localSingle") {
+                            alert("Player 2 Bot has won the round!");
+                        } else {
+                            alert(that.p2Name + " has won the round!");
+                        }
                     } else {
                         that.player1Score++;
                         document.getElementById("p1Score").innerText = that.player1Score;
@@ -12218,7 +12222,11 @@ var Game = exports.Game = function () {
                     that.gameWon = true;
                     that.isPlaying(false);
                 } else if (that.player2Score == that.points2Win) {
-                    alert(that.p2Name + " has won the game! Thanks for playing.");
+                    if (that.multiPlayer == "localSingle") {
+                        alert("Player 2 Bot has won the game! Thanks for playing.");
+                    } else {
+                        alert(that.p2Name + " has won the game! Thanks for playing.");
+                    }
                     that.gameWon = true;
                     that.isPlaying(false);
                 }

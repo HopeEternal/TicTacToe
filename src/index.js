@@ -118,7 +118,7 @@ function userInput(gameInstance) {
         //Bot
         else {
             position = ai(gameInstance);
-            //itemID = position.join('');
+            itemID = position.join('');
             updateGameboard(position);
         }
 

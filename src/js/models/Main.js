@@ -33,7 +33,8 @@ export class Game {
                 if (!that.currPlayer) {
                     that.player2Score++;
                     document.getElementById("p2Score").innerText = that.player2Score;
-                    alert(`${that.p2Name} has won the round!`);
+                    if (that.multiPlayer == "localSingle") { alert(`Player 2 Bot has won the round!`); }
+                    else { alert(`${that.p2Name} has won the round!`); }
                 }
                 else {
                     that.player1Score++;
@@ -93,7 +94,8 @@ export class Game {
                 that.gameWon = true;
                 that.isPlaying(false);
             } else if (that.player2Score == that.points2Win) {
-                alert(`${that.p2Name} has won the game! Thanks for playing.`);
+                if (that.multiPlayer == "localSingle") { alert("Player 2 Bot has won the game! Thanks for playing."); }
+                else { alert(`${that.p2Name} has won the game! Thanks for playing.`); }
                 that.gameWon = true;
                 that.isPlaying(false);
             }
