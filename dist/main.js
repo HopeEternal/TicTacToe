@@ -11791,13 +11791,9 @@ var _Main = __webpack_require__(/*! ./js/models/Main */ "./src/js/models/Main.js
 
 var _AIsingle = __webpack_require__(/*! ./js/models/AIsingle */ "./src/js/models/AIsingle.js");
 
-var game = new _Main.Game();
-//Import Main Data Controller 'Game'
-
-console.log(game);
-
 //Import AI from AISingle
 
+var game = new _Main.Game();
 
 //Requires
 //var pg = require('pg');
@@ -11805,9 +11801,9 @@ console.log(game);
 //A localhost PostgreSQL database connection string
 //var connectionString = "postgres://datafetch:fetchscores4u@localhost/tictactoescoreboard";
 
-
 //Controller Module
 
+//Import Main Data Controller 'Game'
 function setupEventListeners(gameInstance) {
     document.getElementById('startGameBtn').addEventListener('click', function () {
         startGame(gameInstance);
@@ -11847,6 +11843,9 @@ function startGame(gameInstance) {
 
         //Display first player in UI
         displayCurrPlayer(gameInstance);
+
+        // Allows bot to go first
+        if (gameInstance.multiPlayer == "localSingle" && gameInstance.currPlayer) userInput(gameInstance);
     }
 }
 
@@ -11874,46 +11873,57 @@ function displayCurrPlayer(gameInstance) {
 }
 
 function userInput(gameInstance) {
-    var itemID = void 0;
-    var position = void 0;
-    //Human and AI Input for Local games
+
+    // Check to determine what type of game and number of players/bots
+    if (gameInstance.multiPlayer === 'localSingle') {
+        // Human
+        if (gameInstance.currPlayer === false) {
+            updateGameboard(event.target.id.split(""));
+        }
+        // Bot
+        else {
+                updateGameboard((0, _AIsingle.ai)(gameInstance));
+            }
+    } else if (gameInstance.multiPlayer === 'localMulti') {
+        updateGameboard(event.target.id.split(""));
+    }
+
+    // Update gameBoard graphics
     function updateGameboard(position) {
+        var itemID = position.join('');
+
         if (gameInstance.gameState) {
+
             if (document.getElementById(itemID).innerText == "") {
 
-                if (!gameInstance.currPlayer) {
+                if (gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer) {
+
                     var piece = 'X';
                     document.getElementById(itemID).innerText = piece;
                     gameInstance.gameBoard[position[0]][position[1]] = piece;
+
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
+                    updateGameboard((0, _AIsingle.ai)(gameInstance));
+                } else if (gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer) {
+
+                    var piece = 'X';
+                    document.getElementById(itemID).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
                 } else {
+
                     var piece = 'O';
                     document.getElementById(itemID).innerText = piece;
                     gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
                 }
-                gameInstance.currPlayer = !gameInstance.currPlayer;
             }
-            gameInstance.checkWinCon();
-            displayCurrPlayer(gameInstance);
-        }
-    }
-    //Check to determine what type of game and number of players/bots
-    if (gameInstance.multiPlayer === 'localSingle') {
-        //Human
-        if (gameInstance.currPlayer === false) {
-            itemID = event.target.id;
-            position = itemID.split("");
-            updateGameboard(position);
-        }
-        //Bot
-        else {
-                position = (0, _AIsingle.ai)(gameInstance);
-                itemID = position.join('');
-                updateGameboard(position);
+
+            if (gameInstance.gameState) {
+                gameInstance.checkWinCon();
+                displayCurrPlayer(gameInstance);
             }
-    } else if (gameInstance.multiPlayer === 'localMulti') {
-        itemID = event.target.id;
-        position = itemID.split("");
-        updateGameboard(position);
+        }
     }
 }
 
@@ -11975,126 +11985,115 @@ Object.defineProperty(exports, "__esModule", {
 });
 var ai = exports.ai = function aiBot(gameInstance) {
 
-    var position = [0, 0];
-    var continueSearch = true;
     var aiBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 
-    // 1) Find open spaces and calculate priority by updating array
-    // Generate aiBoard from gameBoard array
-    function genAIBoard() {
-        gameInstance.gameBoard.forEach(function (el, row) {
-            for (var col = 0; col < el.length; col++) {
-                if (el[col] === "X") {
-                    aiBoard[row][col] = -1;
-                } else if (el[col] === "O") {
-                    aiBoard[row][col] = 1;
-                } else {
-                    aiBoard[row][col] = 0;
-                }
+    // 1) Generate aiBoard from gameBoard array
+    gameInstance.gameBoard.forEach(function (el, row) {
+
+        for (var col = 0; col < el.length; col++) {
+
+            if (el[col] === "X") {
+                aiBoard[row][col] = -1;
+            } else if (el[col] === "O") {
+                aiBoard[row][col] = 1;
+            } else {
+                aiBoard[row][col] = 0;
             }
-        });
-        console.log(aiBoard);
-    }
-    genAIBoard();
+        }
+    });
 
     // 2) Check for possible win/loss
     for (var i = 0; i < 3; i++) {
+
         // rows
         if (aiBoard[i][0] + aiBoard[i][1] + aiBoard[i][2] === 2) {
-            position = [i, aiBoard[i].findIndex(function (value) {
+
+            return [i, aiBoard[i].findIndex(function (value) {
                 return value === 0;
             })];
-            continueSearch = false;
-            break;
         } else if (aiBoard[i][0] + aiBoard[i][1] + aiBoard[i][2] === -2) {
-            position = [i, aiBoard[i].findIndex(function (value) {
+
+            return [i, aiBoard[i].findIndex(function (value) {
                 return value === 0;
             })];
-            continueSearch = false;
-            break;
         }
         // columns
         if (aiBoard[0][i] + aiBoard[1][i] + aiBoard[2][i] === 2) {
+
             for (var j = 0; j < 3; j++) {
                 if (aiBoard[j][i] === 0) {
-                    position = [j, i];
+                    return [j, i];
                 }
-            }continueSearch = false;
-            break;
+            }
         } else if (aiBoard[0][i] + aiBoard[1][i] + aiBoard[2][i] === -2) {
+
             for (var j = 0; j < 3; j++) {
                 if (aiBoard[j][i] === 0) {
-                    position = [j, i];
+                    return [j, i];
                 }
-            }continueSearch = false;
-            break;
+            }
         }
     }
 
-    // diagonals
+    // diagonal checks
     if (aiBoard[0][0] + aiBoard[1][1] + aiBoard[2][2] === 2) {
+
         for (var i = 0; i < 3; i++) {
             if (aiBoard[i][i] === 0) {
-                position = [i, i];break;
+                return [i, i];
             }
-        }continueSearch = false;
+        }
     } else if (aiBoard[0][0] + aiBoard[1][1] + aiBoard[2][2] === -2) {
+
         for (var i = 0; i < 3; i++) {
             if (aiBoard[i][i] === 0) {
-                position = [i, i];break;
+                return [i, i];
             }
-        }continueSearch = false;
+        }
     }
+
     if (aiBoard[0][2] + aiBoard[1][1] + aiBoard[2][0] === 2) {
-        if (aiBoard[0][2] === 0) {
-            position = [0, 2];
-        } else if (aiBoard[1][1] === 0) {
-            position = [1, 1];
-        } else {
-            position = [2, 0];
-        }
-        continueSearch = false;
-    } else if (aiBoard[0][2] + aiBoard[1][1] + aiBoard[2][0] === -2) {
-        if (aiBoard[0][2] === 0) {
-            position = [0, 2];
-        } else if (aiBoard[1][1] === 0) {
-            position = [1, 1];
-        } else {
-            position = [2, 0];
-        }
-        continueSearch = false;
-    }
 
-    // a) If there are 2 possible wins/losses, randomly place (unless it can line up 2 in a row) (This is not needed anymore. - Wilson)
-
-    // 3) Check to see if the center is open
-    if (continueSearch) {
-        if (aiBoard[1][1] === 0) {
-            position = [1, 1];
-            continueSearch = false;
-        }
-    }
-
-    // 4) Check to see if a corner is open
-    if (continueSearch) {
-        if (aiBoard[0][0] === 0) {
-            return [0, 0];
-        }
         if (aiBoard[0][2] === 0) {
             return [0, 2];
-        }
-        if (aiBoard[2][0] === 0) {
+        } else if (aiBoard[1][1] === 0) {
+            return [1, 1];
+        } else {
             return [2, 0];
         }
-        if (aiBoard[2][2] === 0) {
-            return [2, 2];
+    } else if (aiBoard[0][2] + aiBoard[1][1] + aiBoard[2][0] === -2) {
+
+        if (aiBoard[0][2] === 0) {
+            return [0, 2];
+        } else if (aiBoard[1][1] === 0) {
+            return [1, 1];
+        } else {
+            return [2, 0];
         }
     }
-    //a) Priority: Place across from opponent
 
-    //b) Calculate highest value open space
+    // 3) Check to see if the center is open
+    // 4) Check to see if a corner is open
+    // a) Priority: Place across from opponent
+    // b) Calculate highest value open space
 
-    return position;
+    if (aiBoard[1][1] === 0) {
+        return [1, 1];
+    }
+    if (aiBoard[0][0] === 0) {
+        return [0, 0];
+    }
+    if (aiBoard[0][2] === 0) {
+        return [0, 2];
+    }
+    if (aiBoard[2][0] === 0) {
+        return [2, 0];
+    }
+    if (aiBoard[2][2] === 0) {
+        return [2, 2];
+    }
+
+    return [-1, -1];
 };
 
 /***/ }),
@@ -12216,7 +12215,6 @@ var Game = exports.Game = function () {
                 }
             // check for game winner
             setTimeout(function () {
-                console.log(that.player2Score);
                 if (that.player1Score == that.points2Win) {
                     alert(that.p1Name + " has won the game! Thanks for playing.");
                     that.gameWon = true;

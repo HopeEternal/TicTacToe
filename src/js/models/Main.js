@@ -88,7 +88,6 @@ export class Game {
         }
         // check for game winner
         setTimeout(function(){
-            console.log(that.player2Score);
             if (that.player1Score == that.points2Win) {
                 alert(`${that.p1Name} has won the game! Thanks for playing.`);
                 that.gameWon = true;

@@ -1,20 +1,14 @@
 import './css/style.css'
-//Import Main Data Controller 'Game'
-import { Game } from './js/models/Main';
-let game = new Game();
-console.log(game);
+import { Game } from './js/models/Main'; //Import Main Data Controller 'Game'
+import { ai } from './js/models/AIsingle'; //Import AI from AISingle
 
-//Import AI from AISingle
-import { ai } from './js/models/AIsingle';
+let game = new Game();
 
 //Requires
 //var pg = require('pg');
 
 //A localhost PostgreSQL database connection string
 //var connectionString = "postgres://datafetch:fetchscores4u@localhost/tictactoescoreboard";
-
-
-
 
 //Controller Module
 
@@ -55,6 +49,10 @@ import { ai } from './js/models/AIsingle';
             
             //Display first player in UI
             displayCurrPlayer(gameInstance);
+
+            // Allows bot to go first
+            if ( gameInstance.multiPlayer == "localSingle" && gameInstance.currPlayer)
+                userInput(gameInstance);
         }
     }
 
@@ -83,50 +81,64 @@ function displayCurrPlayer(gameInstance) {
     }
 }
 
-function userInput(gameInstance) {
-    let itemID;
-    let position;
-    //Human and AI Input for Local games
-    function updateGameboard(position) {
-        if (gameInstance.gameState) {
-            if (document.getElementById(itemID).innerText == "") {
-                
-                if (!gameInstance.currPlayer) {
-                    var piece = 'X';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                }
-                else {
-                    var piece = 'O';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                }
-                gameInstance.currPlayer = !gameInstance.currPlayer;
-            }
-            gameInstance.checkWinCon();
-            displayCurrPlayer(gameInstance);
-        }
-    } 
-    //Check to determine what type of game and number of players/bots
+function userInput( gameInstance ) {
+
+    // Check to determine what type of game and number of players/bots
     if (gameInstance.multiPlayer === 'localSingle') {
-        //Human
+        // Human
         if (gameInstance.currPlayer === false) {
-            itemID = event.target.id;
-            position = itemID.split("");
-            updateGameboard(position);
+            updateGameboard( event.target.id.split("") ); 
         } 
-        //Bot
+        // Bot
         else {
-            position = ai(gameInstance);
-            itemID = position.join('');
-            updateGameboard(position);
+            updateGameboard( ai(gameInstance) );
         }
 
     } else if (gameInstance.multiPlayer === 'localMulti') {
-        itemID = event.target.id;
-        position = itemID.split("");
-        updateGameboard(position);
+        updateGameboard( event.target.id.split("") );
     }
+
+    // Update gameBoard graphics
+    function updateGameboard ( position ) {
+        var itemID = position.join('');
+
+        if ( gameInstance.gameState ) {
+
+            if ( document.getElementById( itemID ).innerText == "" ) {
+
+                if ( gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer ) {
+
+                    var piece = 'X';
+                    document.getElementById( itemID ).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
+                    updateGameboard( ai(gameInstance) );
+
+                } else if ( gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer ) {
+
+                    var piece = 'X';
+                    document.getElementById( itemID ).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
+                    
+                } else {
+
+                    var piece = 'O';
+                    document.getElementById(itemID).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
+                }
+            }
+
+            if ( gameInstance.gameState ) {
+                gameInstance.checkWinCon();
+                displayCurrPlayer( gameInstance );
+            }
+        }
+    }
+    
+    
 }
 
 function startModal() {
