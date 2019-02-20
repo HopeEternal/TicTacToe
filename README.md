@@ -13,7 +13,7 @@ Now available on Heroku: https://tictactoeheroku.herokuapp.com/
 
 ## Authors
 
-* **Risa Lee Hall** - *Project Lead and Designer* - [HopeEternal](https://github.com/HopeEternal)
+* **Risa Lee Hall** - *Front-End Developer, UX/UI Designer* - [HopeEternal](https://github.com/HopeEternal)
 * **Wilson Chai** - *Backend Engineer* - [WilsonChai](https://github.com/WilsonChai)
 
 ## License
