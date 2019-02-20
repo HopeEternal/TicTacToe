@@ -101,8 +101,8 @@ function userInput( gameInstance ) {
     // Update gameBoard graphics
     function updateGameboard ( position ) {
         var itemID = position.join('');
-
-        if ( gameInstance.gameState ) {
+        
+        if ( gameInstance.gameState && position[0] >= 0) {
 
             if ( document.getElementById( itemID ).innerText == "" ) {
 
@@ -121,7 +121,7 @@ function userInput( gameInstance ) {
                     document.getElementById( itemID ).innerText = piece;
                     gameInstance.gameBoard[position[0]][position[1]] = piece;
                     gameInstance.currPlayer = !gameInstance.currPlayer;
-                    
+
                 } else {
 
                     var piece = 'O';
@@ -137,8 +137,6 @@ function userInput( gameInstance ) {
             }
         }
     }
-    
-    
 }
 
 function startModal() {

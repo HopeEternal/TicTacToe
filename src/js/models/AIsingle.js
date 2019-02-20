@@ -78,6 +78,11 @@ export var ai = function aiBot(gameInstance) {
     if ( aiBoard[2][0] === 0 ) { return [2, 0]; }
     if ( aiBoard[2][2] === 0 ) { return [2, 2]; }
 
+    if ( aiBoard[0][1] === 0 ) { return [0, 1]; }
+    if ( aiBoard[1][0] === 0 ) { return [1, 0]; }
+    if ( aiBoard[1][2] === 0 ) { return [1, 2]; }
+    if ( aiBoard[2][1] === 0 ) { return [2, 1]; }
+
     return [-1, -1];
 }
 
