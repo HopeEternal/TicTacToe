@@ -145,29 +145,40 @@ function startModal() {
 
 function hideModal(gameInstance) {
     console.log('Hide Modal');
-    document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
-    gameInstance.p1Name = document.getElementById('player1Input').value;
-    gameInstance.p2Name = document.getElementById('player2Input').value;
-    gameInstance.points2Win = parseInt(document.getElementById('points2Win').value);
     
-    //Show Player Names based on Single or Multi
-    if (singleRadio.checked) {
-        document.getElementById('player1Name').innerText = gameInstance.p1Name;
-        document.getElementById('player2Name').innerText = "Player 2 Bot";
-        document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
-        document.getElementById('scrPlayer2Name').innerText = "Player 2 Bot";
-        //Set game type to local single player
-        gameInstance.multiPlayer = 'localSingle';
+        
+        //Set Form Values to Variables
+        gameInstance.p1Name = document.getElementById('player1Input').value;
+        gameInstance.p2Name = document.getElementById('player2Input').value;
+        gameInstance.points2Win = parseInt(document.getElementById('points2Win').value);
+    
+        //Add catch to ensure all fields filled out before starting the game
+    if(gameInstance.p1Name != "" && gameInstance.p2Name != "" && gameInstance.points2Win != "") {
+        //Hide Modal
+        document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
+        //Show Player Names based on Single or Multi
+        if (singleRadio.checked) {
+            document.getElementById('player1Name').innerText = gameInstance.p1Name;
+            document.getElementById('player2Name').innerText = "Player 2 Bot";
+            document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
+            document.getElementById('scrPlayer2Name').innerText = "Player 2 Bot";
+            //Set game type to local single player
+            gameInstance.multiPlayer = 'localSingle';
+        }
+        else if (multiRadio.checked) {
+            document.getElementById('player1Name').innerText = gameInstance.p1Name;
+            document.getElementById('player2Name').innerText = gameInstance.p2Name;
+            document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
+            document.getElementById('scrPlayer2Name').innerText = gameInstance.p2Name;
+            //Set game type to local multi player
+            gameInstance.multiPlayer = 'localMulti';
+        }
+        startGame(gameInstance);
     }
-    else if (multiRadio.checked) {
-        document.getElementById('player1Name').innerText = gameInstance.p1Name;
-        document.getElementById('player2Name').innerText = gameInstance.p2Name;
-        document.getElementById('scrPlayer1Name').innerText = gameInstance.p1Name;
-        document.getElementById('scrPlayer2Name').innerText = gameInstance.p2Name;
-        //Set game type to local multi player
-        gameInstance.multiPlayer = 'localMulti';
+    else {
+        document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
+        //alert(`Please complete all form fields before submitting!`);
     }
-    startGame(gameInstance);
 }
 
 function multiPlayerSettings() {

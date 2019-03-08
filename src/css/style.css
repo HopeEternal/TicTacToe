@@ -228,7 +228,7 @@ main {
     transform: translate(-50%, -50%);
     padding: 2em;
     background-color: rgba(255, 255, 255, 0.95);
-    line-height: 4em;
+    line-height: 3em;
     color: #333333;
   }
 
@@ -242,6 +242,21 @@ main {
   #modal form fieldset .playerSelection label {
     float: left;
   }
+
+
+  #requiredWarning {
+      background-color: #faffce;
+      color: #a49f43;
+      border: 2px #d1cd50 solid;
+      border-radius: 15px;
+      text-align: left;
+  }
+  #requiredWarning i {
+    font-size: 200%;
+    float: left;
+    margin: 6px 20px 10px 50px;
+
+}
 
   .hidden { 
     display: none;
