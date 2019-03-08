@@ -153,7 +153,13 @@ function hideModal(gameInstance) {
         gameInstance.points2Win = parseInt(document.getElementById('points2Win').value);
     
         //Add catch to ensure all fields filled out before starting the game
-    if(gameInstance.p1Name != "" && gameInstance.p2Name != "" && gameInstance.points2Win != "") {
+    if (singleRadio.checked && (gameInstance.p1Name === "" || gameInstance.points2Win === "")) {
+            document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
+        }
+    else if (multiRadio.checked && (gameInstance.p1Name === "" || gameInstance.p2Name === "" || gameInstance.points2Win === "")) {
+            document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
+        }
+    else {
         //Hide Modal
         document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
         //Show Player Names based on Single or Multi
@@ -175,10 +181,7 @@ function hideModal(gameInstance) {
         }
         startGame(gameInstance);
     }
-    else {
-        document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
-        //alert(`Please complete all form fields before submitting!`);
-    }
+    
 }
 
 function multiPlayerSettings() {
