@@ -11794,7 +11794,6 @@ var _AIsingle = __webpack_require__(/*! ./js/models/AIsingle */ "./src/js/models
 //Import AI from AISingle
 
 var game = new _Main.Game();
-
 //Requires
 //var pg = require('pg');
 
@@ -11878,50 +11877,51 @@ function userInput(gameInstance) {
     if (gameInstance.multiPlayer === 'localSingle') {
         // Human
         if (gameInstance.currPlayer === false) {
-            updateGameboard(event.target.id.split(""));
+            updateGameboard(event.target.id.split(""), gameInstance);
         }
         // Bot
         else {
-                updateGameboard((0, _AIsingle.ai)(gameInstance));
+                updateGameboard((0, _AIsingle.ai)(gameInstance), gameInstance);
             }
     } else if (gameInstance.multiPlayer === 'localMulti') {
-        updateGameboard(event.target.id.split(""));
+        updateGameboard(event.target.id.split(""), gameInstance);
     }
 
-    // Update gameBoard graphics
-    function updateGameboard(position) {
-        var itemID = position.join('');
+    if (gameInstance.gameState) {
+        gameInstance.checkWinCon();
+        displayCurrPlayer(gameInstance);
+    }
+}
 
-        if (gameInstance.gameState && position[0] >= 0) {
+// Update gameBoard graphics and check for wins
+function updateGameboard(position, gameInstance) {
+    var itemID = position.join('');
 
-            if (document.getElementById(itemID).innerText == "") {
+    if (gameInstance.gameState && position[0] >= 0) {
 
-                if (gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer) {
+        if (document.getElementById(itemID).innerText == "") {
 
-                    var piece = 'X';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+            if (gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer) {
 
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                    updateGameboard((0, _AIsingle.ai)(gameInstance));
-                } else if (gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer) {
+                var piece = 'X';
+                document.getElementById(itemID).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
 
-                    var piece = 'X';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                } else {
-
-                    var piece = 'O';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                }
-            }
-
-            if (gameInstance.gameState) {
+                gameInstance.currPlayer = !gameInstance.currPlayer;
                 gameInstance.checkWinCon();
-                displayCurrPlayer(gameInstance);
+                userInput(gameInstance);
+            } else if (gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer) {
+
+                var piece = 'X';
+                document.getElementById(itemID).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
+                gameInstance.currPlayer = !gameInstance.currPlayer;
+            } else {
+
+                var piece = 'O';
+                document.getElementById(itemID).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
+                gameInstance.currPlayer = !gameInstance.currPlayer;
             }
         }
     }
@@ -11940,7 +11940,11 @@ function hideModal(gameInstance) {
     gameInstance.points2Win = parseInt(document.getElementById('points2Win').value);
 
     //Add catch to ensure all fields filled out before starting the game
-    if (gameInstance.p1Name != "" && gameInstance.p2Name != "" && gameInstance.points2Win != "") {
+    if (singleRadio.checked && (gameInstance.p1Name === "" || gameInstance.points2Win === "")) {
+        document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
+    } else if (multiRadio.checked && (gameInstance.p1Name === "" || gameInstance.p2Name === "" || gameInstance.points2Win === "")) {
+        document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
+    } else {
         //Hide Modal
         document.getElementById('modalStartBtn').parentNode.parentNode.parentNode.classList.add('hidden');
         //Show Player Names based on Single or Multi
@@ -11960,9 +11964,6 @@ function hideModal(gameInstance) {
             gameInstance.multiPlayer = 'localMulti';
         }
         startGame(gameInstance);
-    } else {
-        document.getElementById('requiredWarning').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please complete all form fields!';
-        //alert(`Please complete all form fields before submitting!`);
     }
 }
 

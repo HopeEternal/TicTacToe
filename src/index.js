@@ -3,7 +3,6 @@ import { Game } from './js/models/Main'; //Import Main Data Controller 'Game'
 import { ai } from './js/models/AIsingle'; //Import AI from AISingle
 
 let game = new Game();
-
 //Requires
 //var pg = require('pg');
 
@@ -82,58 +81,59 @@ function displayCurrPlayer(gameInstance) {
 }
 
 function userInput( gameInstance ) {
-
+    
     // Check to determine what type of game and number of players/bots
     if (gameInstance.multiPlayer === 'localSingle') {
         // Human
         if (gameInstance.currPlayer === false) {
-            updateGameboard( event.target.id.split("") ); 
+            updateGameboard( event.target.id.split(""), gameInstance ); 
         } 
         // Bot
         else {
-            updateGameboard( ai(gameInstance) );
+            updateGameboard( ai(gameInstance), gameInstance );
         }
 
     } else if (gameInstance.multiPlayer === 'localMulti') {
-        updateGameboard( event.target.id.split("") );
+        updateGameboard( event.target.id.split(""), gameInstance );
     }
 
-    // Update gameBoard graphics
-    function updateGameboard ( position ) {
-        var itemID = position.join('');
-        
-        if ( gameInstance.gameState && position[0] >= 0) {
+    if ( gameInstance.gameState ) {
+        gameInstance.checkWinCon();
+        displayCurrPlayer( gameInstance );
+    }
+}
 
-            if ( document.getElementById( itemID ).innerText == "" ) {
+// Update gameBoard graphics and check for wins
+function updateGameboard ( position, gameInstance ) {
+    var itemID = position.join('');
+    
+    if ( gameInstance.gameState && position[0] >= 0) {
 
-                if ( gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer ) {
+        if ( document.getElementById( itemID ).innerText == "" ) {
 
-                    var piece = 'X';
-                    document.getElementById( itemID ).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                    updateGameboard( ai(gameInstance) );
+            if ( gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer ) {
 
-                } else if ( gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer ) {
-
-                    var piece = 'X';
-                    document.getElementById( itemID ).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-
-                } else {
-
-                    var piece = 'O';
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                }
-            }
-
-            if ( gameInstance.gameState ) {
+                var piece = 'X';
+                document.getElementById( itemID ).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
+                
+                gameInstance.currPlayer = !gameInstance.currPlayer;
                 gameInstance.checkWinCon();
-                displayCurrPlayer( gameInstance );
+                userInput( gameInstance );
+
+            } else if ( gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer ) {
+
+                var piece = 'X';
+                document.getElementById( itemID ).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
+                gameInstance.currPlayer = !gameInstance.currPlayer;
+
+            } else {
+
+                var piece = 'O';
+                document.getElementById(itemID).innerText = piece;
+                gameInstance.gameBoard[position[0]][position[1]] = piece;
+                gameInstance.currPlayer = !gameInstance.currPlayer;
             }
         }
     }

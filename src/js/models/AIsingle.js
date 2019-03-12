@@ -16,7 +16,7 @@ export var ai = function aiBot(gameInstance) {
             else                      { aiBoard[row][col] =  0; } 
         }
     });
-        
+
     // 2) Check for possible win/loss
     for (var i = 0; i < 3; i++) {
 
