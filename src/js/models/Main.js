@@ -103,16 +103,17 @@ export class Game {
 
     //isPlaying Game State Definitions
     isPlaying(state) {
+        let grid = document.querySelectorAll('.gridSquare'); 
         if (state) {
             //Enter what to do if the Game is Playing
             console.log('Game is Playing');
-            let grid = document.querySelectorAll('.gridSquare');       
             grid.forEach(cur => cur.classList.add('hvr-rectangle-out'));
             this.gameState = true;
         }
         else {
             //Enter what to do if the Game is not Playing
-            console.log('Game is Not Playing');            
+            console.log('Game is Not Playing');      
+            grid.forEach(cur => cur.classList.remove('hvr-rectangle-out'));      
             this.gameState = false;
         }
     }

@@ -34,7 +34,7 @@
                     <fieldset class="textEntry">
                         <label id="p1Cont">Enter Player 1's Name: <input id="player1Input" type="text"></label>
                         <label id="p2Cont">Enter Player 2's Name: <input id="player2Input" type="text"></label>
-                        <label>Enter points required to win: <input id="points2Win" type="number"></label>
+                        <label>Enter points required to win: <input id="points2Win" title="Enter a number between 0 and 99" type="text" pattern="\d{2}" maxlength="2"></label>
                     </fieldset>
                     <btn class="buttonStyle" id="modalStartBtn">Start!</btn>
                 </form>
