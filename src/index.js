@@ -116,7 +116,7 @@ function updateGameboard ( position, gameInstance ) {
                 var piece = 'X';
                 document.getElementById( itemID ).innerText = piece;
                 gameInstance.gameBoard[position[0]][position[1]] = piece;
-                
+
                 gameInstance.currPlayer = !gameInstance.currPlayer;
                 gameInstance.checkWinCon();
                 userInput( gameInstance );
@@ -129,11 +129,23 @@ function updateGameboard ( position, gameInstance ) {
                 gameInstance.currPlayer = !gameInstance.currPlayer;
 
             } else {
-
+                
                 var piece = 'O';
-                document.getElementById(itemID).innerText = piece;
-                gameInstance.gameBoard[position[0]][position[1]] = piece;
-                gameInstance.currPlayer = !gameInstance.currPlayer;
+                function oPlayerMove() {
+                    document.getElementById(itemID).innerText = piece;
+                    gameInstance.gameBoard[position[0]][position[1]] = piece;
+                    gameInstance.currPlayer = !gameInstance.currPlayer;
+                }
+
+                if(gameInstance.multiPlayer == "localSingle") {
+                    setTimeout(function(){ 
+                        oPlayerMove();
+                         console.log("Hmm...")
+                    }, 1000); 
+                }
+                else {
+                    oPlayerMove();
+                }
             }
         }
     }
@@ -193,5 +205,4 @@ function multiPlayerSettings() {
         console.log('Multi selected');
         document.getElementById('p2Cont').style.display = "block";
     }
-    console.log('Triggered Player settings');
 }
