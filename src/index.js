@@ -68,15 +68,20 @@ let game = new Game();
 
 // UI Controller
 
-
-function displayCurrPlayer(gameInstance) {
+var i = 0;
+function displayCurrPlayer(gameInstance) {   
+    
+    //If it's Player 1's turn   
     if (!gameInstance.currPlayer) {
         document.querySelector('.player1').classList.add('activePlayer');
         document.querySelector('.player2').classList.remove('activePlayer');
+        console.log(gameInstance.currPlayer + " in if " + i++);
     }
+    //If it's Player 2's turn
     else {
         document.querySelector('.player1').classList.remove('activePlayer');
         document.querySelector('.player2').classList.add('activePlayer');
+        console.log(gameInstance.currPlayer + " in else " + i++);
     }
 }
 
@@ -107,45 +112,51 @@ function userInput( gameInstance ) {
 function updateGameboard ( position, gameInstance ) {
     var itemID = position.join('');
     
-    if ( gameInstance.gameState && position[0] >= 0) {
+    // If game is running and there is an input
+    if ( gameInstance.gameState && position[0] >= 0 && document.getElementById( itemID ).innerText == "") {
 
-        if ( document.getElementById( itemID ).innerText == "" ) {
+        // If Player 1 in a bot game
+        if ( gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer ) {
 
-            if ( gameInstance.multiPlayer == "localSingle" && !gameInstance.currPlayer ) {
+            var piece = 'X';
+            document.getElementById( itemID ).innerText = piece;
+            gameInstance.gameBoard[position[0]][position[1]] = piece;
 
-                var piece = 'X';
-                document.getElementById( itemID ).innerText = piece;
+            gameInstance.currPlayer = !gameInstance.currPlayer;
+            gameInstance.checkWinCon();
+            userInput( gameInstance );
+
+        // If Player 1 in a multiplayer game
+        } else if ( gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer ) {
+
+            var piece = 'X';
+            document.getElementById( itemID ).innerText = piece;
+            gameInstance.gameBoard[position[0]][position[1]] = piece;
+            gameInstance.currPlayer = !gameInstance.currPlayer;
+
+        // If Player 2 OR Bot
+        } else {
+            
+            var piece = 'O';
+            
+            function oPlayerMove() {
+                document.getElementById(itemID).innerText = piece;
                 gameInstance.gameBoard[position[0]][position[1]] = piece;
-
                 gameInstance.currPlayer = !gameInstance.currPlayer;
-                gameInstance.checkWinCon();
-                userInput( gameInstance );
-
-            } else if ( gameInstance.multiPlayer == "localMulti" && !gameInstance.currPlayer ) {
-
-                var piece = 'X';
-                document.getElementById( itemID ).innerText = piece;
-                gameInstance.gameBoard[position[0]][position[1]] = piece;
-                gameInstance.currPlayer = !gameInstance.currPlayer;
-
-            } else {
-                
-                var piece = 'O';
-                function oPlayerMove() {
-                    document.getElementById(itemID).innerText = piece;
-                    gameInstance.gameBoard[position[0]][position[1]] = piece;
-                    gameInstance.currPlayer = !gameInstance.currPlayer;
-                }
-
-                if(gameInstance.multiPlayer == "localSingle") {
-                    setTimeout(function(){ 
-                        oPlayerMove();
-                         console.log("Hmm...")
-                    }, 1000); 
-                }
-                else {
+            }
+            
+            // If Bot
+            if(gameInstance.multiPlayer == "localSingle") {
+                setTimeout(function(){ 
                     oPlayerMove();
-                }
+                    console.log("Hmm...")
+                }, 1000); 
+                // Trigger a click manually to invoke userInput function (Doesn't work)
+                // document.querySelector('.gameBoard').click();
+            }
+            // If Player 2 in Multiplayer
+            else {
+                oPlayerMove();
             }
         }
     }

@@ -243,6 +243,47 @@ main {
     float: left;
   }
 
+  #modal form .textEntry input {
+    border: 2px solid #3BD6C9;
+    border-radius: 4px;
+    margin: auto 10px;
+    padding: 4px;
+  }
+
+  #modal form .playerSelection input {
+    -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     position: relative;
+     background-color: #f1f1f1;
+     color: #666;
+     top: 10px;
+     height: 25px;
+     width: 25px;
+     border: 0;
+     border-radius: 50px;
+     cursor: pointer;     
+     margin-right: 7px;
+     outline: none;
+  }
+
+  #modal form .playerSelection input:checked::before {
+     position: absolute;
+     font: 22px/1 'Open Sans', sans-serif;
+     left: 9px;
+     top: -2px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+
+#modal form .playerSelection input:hover {
+     background-color: #f7f7f7;
+}
+
+#modal form .playerSelection input:checked {
+     background-color: #f1f1f1;
+}
 
   #requiredWarning {
       background-color: #faffce;
